@@ -767,6 +767,101 @@
           align-items: flex-start;
         }
       }
+
+      /* SOCIAL PROOF */
+      .testimonials-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 16px;
+        margin-top: 32px;
+      }
+
+      .testimonial-card {
+        background: radial-gradient(circle at top left, #0d1b2e, #020617);
+        border: 1px solid var(--border-subtle);
+        border-radius: var(--radius-lg);
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+      }
+
+      .testimonial-quote {
+        font-size: 13.5px;
+        line-height: 1.75;
+        color: var(--muted);
+        flex: 1;
+        font-style: italic;
+      }
+
+      .testimonial-quote::before {
+        content: "\201C";
+        color: var(--accent);
+        font-size: 20px;
+        font-style: normal;
+        line-height: 1;
+        display: block;
+        margin-bottom: 6px;
+      }
+
+      .testimonial-author {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .testimonial-avatar {
+        width: 36px;
+        height: 36px;
+        border-radius: 999px;
+        background: rgba(56, 189, 248, 0.12);
+        border: 1px solid rgba(56, 189, 248, 0.25);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 13px;
+        font-weight: 600;
+        color: var(--accent);
+        flex-shrink: 0;
+      }
+
+      .testimonial-name {
+        font-size: 13px;
+        font-weight: 600;
+        color: var(--text);
+      }
+
+      .testimonial-role {
+        font-size: 11.5px;
+        color: var(--muted);
+        margin-top: 1px;
+      }
+
+      .social-proof-label {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 4px;
+      }
+
+      .social-proof-label::after {
+        content: "";
+        flex: 1;
+        height: 1px;
+        background: var(--border-subtle);
+      }
+
+      @media (max-width: 720px) {
+        .testimonials-grid {
+          grid-template-columns: minmax(0, 1fr);
+        }
+      }
+
+      @media (min-width: 721px) and (max-width: 940px) {
+        .testimonials-grid {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+      }
     </style>
   </head>
   <body>
@@ -968,6 +1063,63 @@
                   button is wired to a placeholder Razorpay link.
                 </p>
               </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- SOCIAL PROOF -->
+        <section class="section">
+          <div class="section-inner">
+            <div class="social-proof-label">
+              <span class="label">What students say</span>
+            </div>
+            <div class="testimonials-grid">
+
+              <div class="testimonial-card">
+                <p class="testimonial-quote">
+                  Replace this with a real testimonial. Something specific — a
+                  metric, a problem solved, or a moment of clarity from a
+                  student who went through the cohort.
+                </p>
+                <div class="testimonial-author">
+                  <div class="testimonial-avatar">A</div>
+                  <div>
+                    <div class="testimonial-name">Student Name</div>
+                    <div class="testimonial-role">Role · Company</div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="testimonial-card">
+                <p class="testimonial-quote">
+                  Replace this with a real testimonial. Something specific — a
+                  metric, a problem solved, or a moment of clarity from a
+                  student who went through the cohort.
+                </p>
+                <div class="testimonial-author">
+                  <div class="testimonial-avatar">B</div>
+                  <div>
+                    <div class="testimonial-name">Student Name</div>
+                    <div class="testimonial-role">Role · Company</div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="testimonial-card">
+                <p class="testimonial-quote">
+                  Replace this with a real testimonial. Something specific — a
+                  metric, a problem solved, or a moment of clarity from a
+                  student who went through the cohort.
+                </p>
+                <div class="testimonial-author">
+                  <div class="testimonial-avatar">C</div>
+                  <div>
+                    <div class="testimonial-name">Student Name</div>
+                    <div class="testimonial-role">Role · Company</div>
+                  </div>
+                </div>
+              </div>
+
             </div>
           </div>
         </section>
