@@ -1,1 +1,1505 @@
-<html></html>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+    <title>4-Week Advanced RAG Mastery | Aishit Dharwal</title>
+    <meta
+      name="description"
+      content="4-Week Advanced RAG Mastery by Aishit Dharwal. Learn to design, build, and deploy high-quality Retrieval-Augmented Generation systems for real-world products."
+    />
+    <style>
+      :root {
+        --bg: #0f172a;
+        --bg-soft: #020617;
+        --card: #020617;
+        --card-soft: #020617;
+        --accent: #38bdf8;
+        --accent-soft: rgba(56, 189, 248, 0.1);
+        --accent-strong: #0ea5e9;
+        --text: #e5e7eb;
+        --muted: #9ca3af;
+        --border-subtle: rgba(148, 163, 184, 0.25);
+        --radius-lg: 16px;
+        --radius-xl: 24px;
+        --shadow-soft: 0 18px 60px rgba(15, 23, 42, 0.85);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
+          "Inter", sans-serif;
+        background: radial-gradient(circle at top, #0b1120 0, #020617 55%);
+        color: var(--text);
+        -webkit-font-smoothing: antialiased;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      .page {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .nav {
+        position: sticky;
+        top: 0;
+        z-index: 50;
+        backdrop-filter: blur(18px);
+        background: linear-gradient(
+          to bottom,
+          rgba(15, 23, 42, 0.98),
+          rgba(15, 23, 42, 0.9),
+          transparent
+        );
+        border-bottom: 1px solid rgba(148, 163, 184, 0.18);
+      }
+
+      .nav-inner {
+        max-width: 1040px;
+        margin: 0 auto;
+        padding: 14px 20px 10px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+      }
+
+      .logo {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .logo-mark {
+        width: 28px;
+        height: 28px;
+        border-radius: 999px;
+        background: radial-gradient(circle at 20% 0, #38bdf8, #0ea5e9);
+        box-shadow: 0 0 0 1px rgba(148, 163, 184, 0.4),
+          0 12px 40px rgba(56, 189, 248, 0.55);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 14px;
+        font-weight: 600;
+        color: #0b1120;
+      }
+
+      .logo-text-main {
+        font-size: 14px;
+        font-weight: 600;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: var(--muted);
+      }
+
+      .nav-cta {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .pill {
+        font-size: 11px;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--muted);
+        border-radius: 999px;
+        border: 1px solid rgba(148, 163, 184, 0.25);
+        padding: 6px 12px;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        background: radial-gradient(circle at top left, #1f2937, #020617);
+      }
+
+      .pill-dot {
+        width: 7px;
+        height: 7px;
+        border-radius: 999px;
+        background: #22c55e;
+        box-shadow: 0 0 0 4px rgba(34, 197, 94, 0.3);
+      }
+
+      .btn {
+        border-radius: 999px;
+        border: none;
+        padding: 10px 18px;
+        font-size: 13px;
+        font-weight: 600;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        cursor: pointer;
+        transition: all 0.18s ease-out;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        white-space: nowrap;
+      }
+
+      .btn-primary {
+        background: linear-gradient(135deg, #38bdf8, #0ea5e9);
+        color: #0b1120;
+        box-shadow: 0 18px 55px rgba(56, 189, 248, 0.5);
+      }
+
+      .btn-primary:hover {
+        transform: translateY(-1px) translateZ(0);
+        box-shadow: 0 22px 60px rgba(56, 189, 248, 0.6);
+      }
+
+      .btn-outline {
+        background: transparent;
+        color: var(--muted);
+        border: 1px solid rgba(148, 163, 184, 0.4);
+      }
+
+      .btn-outline:hover {
+        border-color: rgba(148, 163, 184, 0.7);
+        color: var(--text);
+      }
+
+      main {
+        flex: 1;
+      }
+
+      .section {
+        padding: 40px 20px;
+      }
+
+      .section-inner {
+        max-width: 1040px;
+        margin: 0 auto;
+      }
+
+      .hero {
+        padding-top: 48px;
+        padding-bottom: 36px;
+      }
+
+      .hero-grid {
+        display: grid;
+        grid-template-columns: minmax(0, 1.5fr) minmax(0, 1.3fr);
+        gap: 36px;
+        align-items: center;
+      }
+
+      .eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        border-radius: 999px;
+        border: 1px solid rgba(148, 163, 184, 0.35);
+        padding: 6px 12px 6px 6px;
+        background: radial-gradient(circle at left, #1f2937, #020617);
+        font-size: 11px;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--muted);
+        margin-bottom: 18px;
+      }
+
+      .eyebrow-tag {
+        border-radius: 999px;
+        padding: 4px 10px;
+        background: linear-gradient(135deg, #38bdf8, #0ea5e9);
+        color: #0b1120;
+        font-weight: 600;
+      }
+
+      .hero-title {
+        font-size: clamp(32px, 4vw, 40px);
+        line-height: 1.05;
+        letter-spacing: -0.04em;
+        margin: 0 0 16px;
+      }
+
+      .hero-title span {
+        background: linear-gradient(to right, #e5e7eb, #bae6fd);
+        -webkit-background-clip: text;
+        color: transparent;
+      }
+
+      .hero-subtitle {
+        font-size: 15px;
+        line-height: 1.7;
+        color: var(--muted);
+        max-width: 34rem;
+      }
+
+      .hero-subtitle-strong {
+        color: #e5e7eb;
+      }
+
+      .hero-cta-row {
+        margin-top: 24px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        align-items: center;
+      }
+
+      .hero-trust {
+        margin-top: 20px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px 20px;
+        align-items: center;
+        font-size: 12px;
+        color: var(--muted);
+      }
+
+      .hero-trust strong {
+        color: #e5e7eb;
+      }
+
+      .hero-metrics {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 16px;
+        font-size: 12px;
+      }
+
+      .hero-metric-label {
+        color: var(--muted);
+      }
+
+      .hero-metric-value {
+        font-weight: 600;
+        color: #e5e7eb;
+      }
+
+      .badge {
+        font-size: 11px;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: #22c55e;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+      }
+
+      .badge-pill {
+        border-radius: 999px;
+        padding: 4px 10px;
+        border: 1px solid rgba(34, 197, 94, 0.5);
+        background: linear-gradient(
+          135deg,
+          rgba(34, 197, 94, 0.18),
+          rgba(21, 128, 61, 0.05)
+        );
+      }
+
+      .hero-card {
+        border-radius: var(--radius-xl);
+        border: 1px solid var(--border-subtle);
+        background: radial-gradient(circle at top, #020617, #020617);
+        box-shadow: var(--shadow-soft);
+        padding: 20px 20px 18px;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .hero-card::before {
+        content: "";
+        position: absolute;
+        inset: -1px;
+        background: radial-gradient(
+          circle at 10% -10%,
+          rgba(56, 189, 248, 0.35),
+          transparent 60%
+        );
+        opacity: 0.8;
+        pointer-events: none;
+      }
+
+      .hero-card-inner {
+        position: relative;
+        z-index: 1;
+      }
+
+      .card-section {
+        border-radius: 14px;
+        padding: 12px 12px 10px;
+        border: 1px solid rgba(148, 163, 184, 0.25);
+        background: radial-gradient(
+          circle at top left,
+          rgba(15, 23, 42, 0.9),
+          rgba(15, 23, 42, 0.98)
+        );
+        margin-bottom: 10px;
+      }
+
+      .card-section-heading {
+        font-size: 11px;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: #9ca3af;
+        margin-bottom: 6px;
+      }
+
+      .card-row {
+        display: flex;
+        justify-content: space-between;
+        gap: 12px;
+        font-size: 13px;
+        margin-bottom: 4px;
+      }
+
+      .label {
+        color: var(--muted);
+      }
+
+      .value {
+        color: #e5e7eb;
+        font-weight: 500;
+      }
+
+      .value-strong {
+        color: #f97316;
+        font-weight: 600;
+      }
+
+      .price-row {
+        display: flex;
+        align-items: baseline;
+        gap: 8px;
+        margin-bottom: 4px;
+      }
+
+      .price-main {
+        font-size: 22px;
+        font-weight: 600;
+      }
+
+      .price-crossed {
+        font-size: 14px;
+        color: var(--muted);
+        text-decoration: line-through;
+      }
+
+      .price-note {
+        font-size: 11px;
+        color: var(--muted);
+      }
+
+      .pill-inline {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        border-radius: 999px;
+        border: 1px solid rgba(248, 250, 252, 0.16);
+        padding: 4px 10px;
+        font-size: 11px;
+        color: var(--muted);
+        margin-top: 10px;
+      }
+
+      .pill-inline strong {
+        color: #e5e7eb;
+      }
+
+      .divider-soft {
+        border-top: 1px solid rgba(15, 23, 42, 0.95);
+        margin: 10px 0;
+      }
+
+      .hint {
+        font-size: 11px;
+        color: var(--muted);
+      }
+
+      .hint strong {
+        color: #e5e7eb;
+      }
+
+      .enroll-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin-top: 10px;
+      }
+
+      .enroll-actions {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+      }
+
+      .enroll-guardrail {
+        font-size: 11px;
+        color: var(--muted);
+      }
+
+      .tagline {
+        font-size: 13px;
+        color: var(--muted);
+        margin-top: 10px;
+      }
+
+      .tagline strong {
+        color: #e5e7eb;
+      }
+
+      .grid-2 {
+        display: grid;
+        grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+        gap: 24px;
+      }
+
+      .card {
+        border-radius: var(--radius-lg);
+        border: 1px solid var(--border-subtle);
+        background: radial-gradient(circle at top left, #020617, #020617);
+        padding: 18px 18px 16px;
+      }
+
+      .card h2 {
+        font-size: 18px;
+        letter-spacing: -0.02em;
+        margin: 0 0 8px;
+      }
+
+      .card p {
+        font-size: 13px;
+        line-height: 1.7;
+        color: var(--muted);
+        margin: 0 0 12px;
+      }
+
+      .list {
+        list-style: none;
+        margin: 8px 0 0;
+        padding: 0;
+        font-size: 13px;
+        color: var(--muted);
+      }
+
+      .list li {
+        display: flex;
+        align-items: flex-start;
+        gap: 8px;
+        margin-bottom: 6px;
+      }
+
+      .list-bullet {
+        width: 14px;
+        height: 14px;
+        border-radius: 999px;
+        background: var(--accent-soft);
+        border: 1px solid rgba(56, 189, 248, 0.5);
+        flex-shrink: 0;
+        margin-top: 2px;
+      }
+
+      .list-title {
+        color: #e5e7eb;
+        font-weight: 500;
+      }
+
+      .list-muted {
+        font-size: 12px;
+        color: var(--muted);
+      }
+
+      .section-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        gap: 24px;
+        margin-bottom: 14px;
+      }
+
+      .section-title {
+        font-size: 18px;
+        letter-spacing: -0.02em;
+        margin: 0;
+      }
+
+      .section-kicker {
+        font-size: 11px;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--muted);
+      }
+
+      .section-description {
+        font-size: 13px;
+        color: var(--muted);
+        max-width: 28rem;
+      }
+
+      .curriculum-week {
+        border-radius: 12px;
+        padding: 10px 12px;
+        border: 1px solid rgba(148, 163, 184, 0.35);
+        margin-bottom: 8px;
+        background: radial-gradient(circle at top left, #020617, #020617);
+      }
+
+      .curriculum-week-header {
+        display: flex;
+        justify-content: space-between;
+        gap: 12px;
+        align-items: baseline;
+        margin-bottom: 4px;
+      }
+
+      .curriculum-week-title {
+        font-size: 14px;
+        font-weight: 500;
+      }
+
+      .curriculum-week-tag {
+        font-size: 11px;
+        color: var(--muted);
+      }
+
+      .curriculum-topics {
+        font-size: 12px;
+        color: var(--muted);
+      }
+
+      .two-column {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+        gap: 18px;
+      }
+
+      .profile {
+        display: flex;
+        gap: 14px;
+      }
+
+      .avatar {
+        width: 52px;
+        height: 52px;
+        border-radius: 999px;
+        background: radial-gradient(circle at 20% 0, #38bdf8, #0f172a);
+        border: 1px solid rgba(148, 163, 184, 0.55);
+        box-shadow: 0 14px 40px rgba(15, 23, 42, 0.7);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 600;
+        color: #f9fafb;
+        font-size: 20px;
+      }
+
+      .profile-meta {
+        font-size: 13px;
+      }
+
+      .profile-name {
+        font-weight: 600;
+      }
+
+      .profile-role {
+        color: var(--muted);
+      }
+
+      .profile-tags {
+        margin-top: 6px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+      }
+
+      .profile-tag {
+        font-size: 11px;
+        border-radius: 999px;
+        border: 1px solid rgba(148, 163, 184, 0.4);
+        padding: 3px 8px;
+        color: var(--muted);
+      }
+
+      .pill-check {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 11px;
+        border-radius: 999px;
+        border: 1px solid rgba(34, 197, 94, 0.6);
+        padding: 4px 10px;
+        background: linear-gradient(
+          135deg,
+          rgba(34, 197, 94, 0.12),
+          rgba(15, 118, 110, 0.05)
+        );
+        color: #22c55e;
+      }
+
+      .pill-cross {
+        border-color: rgba(248, 113, 113, 0.6);
+        background: linear-gradient(
+          135deg,
+          rgba(248, 113, 113, 0.12),
+          rgba(127, 29, 29, 0.05)
+        );
+        color: #f87171;
+      }
+
+      .faq-item {
+        border-radius: 12px;
+        border: 1px solid rgba(148, 163, 184, 0.3);
+        padding: 10px 12px 8px;
+        margin-bottom: 8px;
+      }
+
+      .faq-q {
+        font-size: 13px;
+        font-weight: 500;
+        margin-bottom: 4px;
+      }
+
+      .faq-a {
+        font-size: 12px;
+        color: var(--muted);
+      }
+
+      .how-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        font-size: 13px;
+        color: var(--muted);
+      }
+
+      .how-list li {
+        display: flex;
+        gap: 8px;
+        margin-bottom: 8px;
+      }
+
+      .how-step {
+        flex-shrink: 0;
+        width: 20px;
+        height: 20px;
+        border-radius: 999px;
+        border: 1px solid rgba(148, 163, 184, 0.6);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 11px;
+        color: var(--muted);
+      }
+
+      .footer {
+        border-top: 1px solid rgba(15, 23, 42, 0.9);
+        padding: 18px 20px 24px;
+        font-size: 12px;
+        color: var(--muted);
+      }
+
+      .footer-inner {
+        max-width: 1040px;
+        margin: 0 auto;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        gap: 12px;
+      }
+
+      .footer-links {
+        display: flex;
+        gap: 14px;
+        flex-wrap: wrap;
+      }
+
+      .footer-links a {
+        color: var(--muted);
+      }
+
+      .footer-links a:hover {
+        color: var(--text);
+      }
+
+      @media (max-width: 880px) {
+        .hero-grid {
+          grid-template-columns: minmax(0, 1fr);
+        }
+
+        .hero-card {
+          order: -1;
+        }
+
+        .section {
+          padding-inline: 16px;
+        }
+
+        .nav-inner {
+          padding-inline: 16px;
+        }
+      }
+
+      @media (max-width: 720px) {
+        .grid-2,
+        .two-column {
+          grid-template-columns: minmax(0, 1fr);
+        }
+
+        .section-header {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+
+        .hero-cta-row {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+
+        .enroll-row {
+          align-items: flex-start;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page">
+      <header class="nav">
+        <div class="nav-inner">
+          <div class="logo">
+            <div class="logo-mark">A</div>
+            <div>
+              <div class="logo-text-main">Aishit Dharwal</div>
+            </div>
+          </div>
+          <div class="nav-cta">
+            <div class="pill">
+              <span class="pill-dot"></span>
+              <span>Next cohort: Limited seats</span>
+            </div>
+            <a href="#enroll" class="btn btn-primary">
+              Enroll Now
+              <span>→</span>
+            </a>
+          </div>
+        </div>
+      </header>
+
+      <main>
+        <!-- HERO -->
+        <section class="section hero">
+          <div class="section-inner hero-grid">
+            <div>
+              <div class="eyebrow">
+                <span class="eyebrow-tag">4-Week Live Cohort</span>
+                <span>Advanced RAG Mastery</span>
+              </div>
+              <h1 class="hero-title">
+                Build RAG systems that
+                <span>actually ship to production.</span>
+              </h1>
+              <p class="hero-subtitle">
+                A hands-on, implementation-first cohort where you
+                <span class="hero-subtitle-strong"
+                  >design, build, and ship an advanced Retrieval-Augmented
+                  Generation system end-to-end</span
+                >
+                — from data pipelines to evaluation and observability.
+              </p>
+              <div class="hero-cta-row">
+                <a href="#enroll" class="btn btn-primary">
+                  Enroll in Advanced RAG Mastery
+                </a>
+                <a href="#curriculum" class="btn btn-outline">
+                  View full curriculum
+                </a>
+              </div>
+              <div class="hero-trust">
+                <div>
+                  <strong>Built for engineers & builders</strong>
+                  shipping real-world AI products.
+                </div>
+                <div class="hero-metrics">
+                  <div>
+                    <div class="hero-metric-label">Format</div>
+                    <div class="hero-metric-value">Live + project-based</div>
+                  </div>
+                  <div>
+                    <div class="hero-metric-label">Duration</div>
+                    <div class="hero-metric-value">4 weeks</div>
+                  </div>
+                  <div>
+                    <div class="hero-metric-label">Level</div>
+                    <div class="hero-metric-value">Advanced / applied</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="hero-card" id="enroll">
+              <div class="hero-card-inner">
+                <div class="card-section">
+                  <div class="card-row">
+                    <div>
+                      <div class="card-section-heading">Cohort details</div>
+                      <div class="price-row">
+                        <div class="price-main">
+                          ₹XX,XXX
+                          <span style="font-size: 12px; font-weight: 400">
+                            (incl. GST)
+                          </span>
+                        </div>
+                        <div class="price-crossed">₹YY,YYY</div>
+                      </div>
+                      <div class="price-note">
+                        Early-bird pricing for first
+                        <strong>XX</strong> seats.
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card-row">
+                    <div class="label">Schedule</div>
+                    <div class="value">
+                      Starts
+                      <span class="value-strong">DD Month YYYY</span> · 4 weeks
+                    </div>
+                  </div>
+                  <div class="card-row">
+                    <div class="label">Live sessions</div>
+                    <div class="value">
+                      Days &amp; time (IST) — e.g. Tue/Thu, 8–10pm
+                    </div>
+                  </div>
+                  <div class="card-row">
+                    <div class="label">Format</div>
+                    <div class="value">Live lectures, labs &amp; feedback</div>
+                  </div>
+                  <div class="card-row">
+                    <div class="label">Access</div>
+                    <div class="value">
+                      Session recordings &amp; resources for 12+ months
+                    </div>
+                  </div>
+                  <div class="pill-inline">
+                    <span>⏱</span>
+                    <span
+                      >Spots are intentionally limited so I can review your
+                      work.</span
+                    >
+                  </div>
+                </div>
+
+                <div class="card-section">
+                  <div class="card-section-heading">This cohort is for you if</div>
+                  <ul class="list">
+                    <li>
+                      <div class="list-bullet"></div>
+                      <div>
+                        <span class="list-title"
+                          >You want to go beyond toy RAG demos.</span
+                        >
+                        <div class="list-muted">
+                          We work with messy data, latency constraints, and
+                          product requirements — not just notebooks.
+                        </div>
+                      </div>
+                    </li>
+                    <li>
+                      <div class="list-bullet"></div>
+                      <div>
+                        <span class="list-title"
+                          >You’re comfortable writing code.</span
+                        >
+                        <div class="list-muted">
+                          Ideal for engineers, technical founders, and data
+                          practitioners with 1–2+ years experience.
+                        </div>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+
+                <div class="divider-soft"></div>
+
+                <div class="enroll-row">
+                  <div class="enroll-actions">
+                    <a
+                      href="RAZORPAY_CHECKOUT_LINK_HERE"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="btn btn-primary"
+                    >
+                      Enroll Now
+                    </a>
+                    <a href="#how-to-enroll" class="btn btn-outline">
+                      How enrollment works
+                    </a>
+                  </div>
+                  <div class="enroll-guardrail">
+                    No fluff. No hype. Just advanced, practical RAG.
+                  </div>
+                </div>
+
+                <p class="tagline">
+                  <strong>Build once, reuse everywhere:</strong> the project you
+                  build in this cohort can become the backbone of your
+                  company’s RAG stack.
+                </p>
+
+                <p class="hint">
+                  Replace
+                  <strong>dates, timings, and pricing</strong>
+                  above with your final numbers. The
+                  <strong>Enroll Now</strong>
+                  button is wired to a placeholder Razorpay link.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- OUTCOMES & WHO IT'S FOR -->
+        <section class="section">
+          <div class="section-inner grid-2">
+            <div>
+              <div class="section-header">
+                <div>
+                  <div class="section-kicker">Learning outcomes</div>
+                  <h2 class="section-title">
+                    By the end of 4 weeks, you will…
+                  </h2>
+                </div>
+              </div>
+              <ul class="list">
+                <li>
+                  <div class="list-bullet"></div>
+                  <div>
+                    <div class="list-title">
+                      Design robust retrieval pipelines for your domain.
+                    </div>
+                    <div class="list-muted">
+                      Choose the right chunking, embedding, indexing and
+                      reranking strategy for your specific use-cases instead of
+                      blindly copy-pasting recipes.
+                    </div>
+                  </div>
+                </li>
+                <li>
+                  <div class="list-bullet"></div>
+                  <div>
+                    <div class="list-title">
+                      Ship an end-to-end RAG system to production.
+                    </div>
+                    <div class="list-muted">
+                      From ingestion jobs to APIs, caching, monitoring and
+                      guardrails — you’ll have a complete reference project you
+                      understand deeply.
+                    </div>
+                  </div>
+                </li>
+                <li>
+                  <div class="list-bullet"></div>
+                  <div>
+                    <div class="list-title">
+                      Evaluate and iterate with data, not vibes.
+                    </div>
+                    <div class="list-muted">
+                      Build evaluation sets, track retrieval quality, and run
+                      experiments to improve your system with confidence.
+                    </div>
+                  </div>
+                </li>
+                <li>
+                  <div class="list-bullet"></div>
+                  <div>
+                    <div class="list-title">
+                      Talk about RAG like a senior engineer.
+                    </div>
+                    <div class="list-muted">
+                      Develop the mental models and vocabulary to make and
+                      defend architectural decisions on your team.
+                    </div>
+                  </div>
+                </li>
+              </ul>
+            </div>
+
+            <div>
+              <div class="section-header">
+                <div>
+                  <div class="section-kicker">Fit</div>
+                  <h2 class="section-title">
+                    Is this course for you?
+                  </h2>
+                </div>
+              </div>
+              <div class="two-column">
+                <div class="card">
+                  <div class="pill-check">
+                    <span>✓</span>
+                    <span>Perfect for you if…</span>
+                  </div>
+                  <ul class="list">
+                    <li>
+                      <div class="list-bullet"></div>
+                      <div>
+                        <span class="list-title"
+                          >You’re already building with LLMs.</span
+                        >
+                        <div class="list-muted">
+                          You’ve tried RAG or LLM apps before and now want to
+                          do it properly.
+                        </div>
+                      </div>
+                    </li>
+                    <li>
+                      <div class="list-bullet"></div>
+                      <div>
+                        <span class="list-title"
+                          >You like to learn by building.</span
+                        >
+                        <div class="list-muted">
+                          You’re happy to write code, debug, and ship a real
+                          project over 4 weeks.
+                        </div>
+                      </div>
+                    </li>
+                    <li>
+                      <div class="list-bullet"></div>
+                      <div>
+                        <span class="list-title"
+                          >You want feedback on your work.</span
+                        >
+                        <div class="list-muted">
+                          You value code reviews, architecture feedback, and
+                          office hours to unblock you.
+                        </div>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+
+                <div class="card">
+                  <div class="pill-check pill-cross">
+                    <span>✕</span>
+                    <span>Not a good fit if…</span>
+                  </div>
+                  <ul class="list">
+                    <li>
+                      <div class="list-bullet"></div>
+                      <div>
+                        <span class="list-title"
+                          >You’ve never programmed before.</span
+                        >
+                        <div class="list-muted">
+                          We won’t cover basic programming concepts. You should
+                          be comfortable reading and writing code.
+                        </div>
+                      </div>
+                    </li>
+                    <li>
+                      <div class="list-bullet"></div>
+                      <div>
+                        <span class="list-title"
+                          >You just want a high-level overview.</span
+                        >
+                        <div class="list-muted">
+                          This is for practitioners, not passive content
+                          consumers. You’re expected to build.
+                        </div>
+                      </div>
+                    </li>
+                    <li>
+                      <div class="list-bullet"></div>
+                      <div>
+                        <span class="list-title"
+                          >You can’t commit ~6–8 hrs/week.</span
+                        >
+                        <div class="list-muted">
+                          You’ll get the most value if you can attend live or
+                          watch recordings and implement between sessions.
+                        </div>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- CURRICULUM -->
+        <section class="section" id="curriculum">
+          <div class="section-inner">
+            <div class="section-header">
+              <div>
+                <div class="section-kicker">Curriculum</div>
+                <h2 class="section-title">
+                  The 4-week Advanced RAG Mastery roadmap
+                </h2>
+              </div>
+              <p class="section-description">
+                Each week we focus on one part of a production-grade RAG stack.
+                You’ll implement everything in code, with a single capstone
+                project tying it all together.
+              </p>
+            </div>
+
+            <div class="grid-2">
+              <div>
+                <div class="curriculum-week">
+                  <div class="curriculum-week-header">
+                    <div class="curriculum-week-title">
+                      Week 1 — Foundations & data pipelines
+                    </div>
+                    <div class="curriculum-week-tag">Architecture & data</div>
+                  </div>
+                  <div class="curriculum-topics">
+                    RAG mental models · when RAG is (and isn’t) the right fit ·
+                    data sources, ingestion patterns · robust chunking strategies
+                    · embeddings & vector stores · building your first
+                    domain-specific index.
+                  </div>
+                </div>
+                <div class="curriculum-week">
+                  <div class="curriculum-week-header">
+                    <div class="curriculum-week-title">
+                      Week 2 — Retrieval, reranking & prompt strategies
+                    </div>
+                    <div class="curriculum-week-tag">Quality & relevance</div>
+                  </div>
+                  <div class="curriculum-topics">
+                    Dense vs sparse retrieval · hybrid search · rerankers ·
+                    retrieval-time filters · query rewriting · system/prompt
+                    patterns specific to RAG · handling long-context and
+                    hallucinations.
+                  </div>
+                </div>
+              </div>
+              <div>
+                <div class="curriculum-week">
+                  <div class="curriculum-week-header">
+                    <div class="curriculum-week-title">
+                      Week 3 — Productionization & performance
+                    </div>
+                    <div class="curriculum-week-tag">APIs & infra</div>
+                  </div>
+                  <div class="curriculum-topics">
+                    Turning notebooks into services · API design for RAG ·
+                    latency and cost optimization · caching strategies ·
+                    background jobs & reindexing · configuration management for
+                    experiments.
+                  </div>
+                </div>
+                <div class="curriculum-week">
+                  <div class="curriculum-week-header">
+                    <div class="curriculum-week-title">
+                      Week 4 — Evaluation, observability & iteration
+                    </div>
+                    <div class="curriculum-week-tag">Reliability</div>
+                  </div>
+                  <div class="curriculum-topics">
+                    Building evaluation sets · retrieval metrics vs
+                    end-to-end metrics · offline vs online evaluation ·
+                    analytics & tracing · debugging bad answers · planning your
+                    next 90 days of RAG improvements post-cohort.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ABOUT INSTRUCTOR & FORMAT -->
+        <section class="section">
+          <div class="section-inner grid-2">
+            <div>
+              <div class="section-header">
+                <div>
+                  <div class="section-kicker">Your instructor</div>
+                  <h2 class="section-title">
+                    Learn with Aishit Dharwal
+                  </h2>
+                </div>
+              </div>
+              <div class="card">
+                <div class="profile">
+                  <div class="avatar">A</div>
+                  <div class="profile-meta">
+                    <div class="profile-name">Aishit Dharwal</div>
+                    <div class="profile-role">
+                      AI engineer & educator focused on practical, production
+                      RAG systems.
+                    </div>
+                    <div class="profile-tags">
+                      <span class="profile-tag">Ships real products</span>
+                      <span class="profile-tag">Deep RAG practitioner</span>
+                      <span class="profile-tag">Teacher-first mindset</span>
+                    </div>
+                  </div>
+                </div>
+                <p>
+                  Write a short 3–4 line bio here:
+                  <span class="list-muted"
+                    >where you’ve worked, products you’ve shipped, how long
+                    you’ve been building with LLMs/RAG, and why you’re teaching
+                    this cohort.</span
+                  >
+                </p>
+                <p>
+                  Focus on what makes your perspective unique: your experience
+                  with messy real-world data, debugging production systems, and
+                  helping other engineers ship.
+                </p>
+              </div>
+            </div>
+
+            <div>
+              <div class="section-header">
+                <div>
+                  <div class="section-kicker">Format</div>
+                  <h2 class="section-title">
+                    How the cohort works
+                  </h2>
+                </div>
+              </div>
+              <div class="card">
+                <ul class="list">
+                  <li>
+                    <div class="list-bullet"></div>
+                    <div>
+                      <div class="list-title">Live sessions (2x / week).</div>
+                      <div class="list-muted">
+                        Deep dives into concepts, live coding, and reviewing
+                        real examples. Recordings available if you can’t make
+                        it live.
+                      </div>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="list-bullet"></div>
+                    <div>
+                      <div class="list-title">
+                        Hands-on project you’ll be proud of.
+                      </div>
+                      <div class="list-muted">
+                        Build a RAG system around data relevant to you (docs,
+                        product, knowledge base) following the same architecture
+                        we cover in class.
+                      </div>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="list-bullet"></div>
+                    <div>
+                      <div class="list-title">Community & accountability.</div>
+                      <div class="list-muted">
+                        Private cohort space to ask questions, share progress,
+                        and see how others are solving similar problems.
+                      </div>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="list-bullet"></div>
+                    <div>
+                      <div class="list-title">
+                        Feedback on key milestones.
+                      </div>
+                      <div class="list-muted">
+                        Get feedback on your architecture, retrieval strategy,
+                        and evaluation approach so you don’t get stuck.
+                      </div>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- HOW TO ENROLL & FAQs -->
+        <section class="section" id="how-to-enroll">
+          <div class="section-inner grid-2">
+            <div>
+              <div class="section-header">
+                <div>
+                  <div class="section-kicker">Enrollment</div>
+                  <h2 class="section-title">
+                    How to enroll in 3 simple steps
+                  </h2>
+                </div>
+              </div>
+              <div class="card">
+                <ol class="how-list">
+                  <li>
+                    <div class="how-step">1</div>
+                    <div>
+                      <strong>Reserve your seat via Razorpay.</strong>
+                      <div>
+                        Click any
+                        <span class="list-title">Enroll Now</span>
+                        button on this page. You’ll be redirected to a secure
+                        Razorpay checkout page.
+                      </div>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="how-step">2</div>
+                    <div>
+                      <strong>Check your email for confirmation.</strong>
+                      <div>
+                        You’ll receive an email with confirmation, calendar
+                        invites, and access to the cohort community within
+                        <span class="list-title">X hours</span>.
+                      </div>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="how-step">3</div>
+                    <div>
+                      <strong>Join the kickoff call.</strong>
+                      <div>
+                        We’ll align on expectations, walk through the project
+                        we’ll build, and set you up for a successful 4 weeks.
+                      </div>
+                    </div>
+                  </li>
+                </ol>
+                <p class="hint">
+                  If Razorpay doesn’t support your payment method or you need an
+                  invoice, add a short line here on how students can reach you
+                  (e.g. email or DM on X).
+                </p>
+              </div>
+            </div>
+
+            <div>
+              <div class="section-header">
+                <div>
+                  <div class="section-kicker">Questions</div>
+                  <h2 class="section-title">
+                    Frequently asked questions
+                  </h2>
+                </div>
+              </div>
+              <div>
+                <div class="faq-item">
+                  <div class="faq-q">
+                    I’m not sure if I’m “advanced” enough. Should I still join?
+                  </div>
+                  <div class="faq-a">
+                    If you’re comfortable writing code and have built anything
+                    with APIs or basic LLM apps before, you’ll be fine. We
+                    won’t spend time on absolute basics, but I’ll give you
+                    starter templates so you can keep up even if you don’t know
+                    every tool yet.
+                  </div>
+                </div>
+                <div class="faq-item">
+                  <div class="faq-q">
+                    What if I can’t attend some live sessions?
+                  </div>
+                  <div class="faq-a">
+                    All live sessions are recorded and shared within
+                    <span class="list-title">24 hours</span>. You can watch
+                    them at your own pace and ask questions in the community or
+                    during office hours.
+                  </div>
+                </div>
+                <div class="faq-item">
+                  <div class="faq-q">
+                    Will we cover specific tools (LangChain, LlamaIndex, etc.)?
+                  </div>
+                  <div class="faq-a">
+                    We’ll use a minimal set of tools and focus on principles
+                    that transfer across frameworks. The goal is that you can
+                    reason about RAG systems regardless of which library you
+                    end up using.
+                  </div>
+                </div>
+                <div class="faq-item">
+                  <div class="faq-q">
+                    Do I get lifetime access to materials?
+                  </div>
+                  <div class="faq-a">
+                    Specify your policy here (e.g.
+                    <span class="list-title"
+                      >12 months of access to recordings and resources</span
+                    >
+                    plus future updates for this cohort).
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- FINAL CTA -->
+        <section class="section">
+          <div class="section-inner">
+            <div class="card">
+              <div class="section-header">
+                <div>
+                  <div class="section-kicker">Next cohort</div>
+                  <h2 class="section-title">
+                    Build an advanced RAG system you can actually ship.
+                  </h2>
+                </div>
+                <div>
+                  <div class="badge-pill">
+                    <span>Limited seats · Early-bird pricing live</span>
+                  </div>
+                </div>
+              </div>
+              <div class="hero-cta-row">
+                <a
+                  href="RAZORPAY_CHECKOUT_LINK_HERE"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="btn btn-primary"
+                >
+                  Enroll Now
+                </a>
+                <div class="hero-trust">
+                  <div>
+                    <strong>Practical. Opinionated. No fluff.</strong>
+                    Just the skills you need to design, build, and iterate on
+                    serious RAG systems.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <footer class="footer">
+        <div class="footer-inner">
+          <div>© <span id="year"></span> Aishit Dharwal. All rights reserved.</div>
+          <div class="footer-links">
+            <a href="mailto:YOUR_EMAIL_HERE">Contact</a>
+            <a href="#curriculum">Curriculum</a>
+            <a href="#enroll">Enroll</a>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script>
+      // Set current year in footer
+      (function () {
+        var el = document.getElementById("year");
+        if (el) {
+          el.textContent = new Date().getFullYear();
+        }
+      })();
+    </script>
+  </body>
+</html>
