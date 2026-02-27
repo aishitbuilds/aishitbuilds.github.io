@@ -829,15 +829,15 @@
                 <div class="hero-metrics">
                   <div>
                     <div class="hero-metric-label">Format</div>
-                    <div class="hero-metric-value">Live + project-based</div>
+                    <div class="hero-metric-value">2× live / week (Fri &amp; Sat)</div>
                   </div>
                   <div>
                     <div class="hero-metric-label">Duration</div>
-                    <div class="hero-metric-value">4 weeks</div>
+                    <div class="hero-metric-value">4 weeks + buffer week</div>
                   </div>
                   <div>
-                    <div class="hero-metric-label">Level</div>
-                    <div class="hero-metric-value">Advanced / applied</div>
+                    <div class="hero-metric-label">Sessions</div>
+                    <div class="hero-metric-value">9 live sessions</div>
                   </div>
                 </div>
               </div>
@@ -869,17 +869,24 @@
                     <div class="value">
                       Starts
                       <span class="value-strong">DD Month YYYY</span> · 4 weeks
+                      + 1 buffer week
                     </div>
                   </div>
                   <div class="card-row">
                     <div class="label">Live sessions</div>
                     <div class="value">
-                      Days &amp; time (IST) — e.g. Tue/Thu, 8–10pm
+                      2× per week — Friday &amp; Saturday, 1.5 hours each (IST)
                     </div>
                   </div>
                   <div class="card-row">
                     <div class="label">Format</div>
                     <div class="value">Live lectures, labs &amp; feedback</div>
+                  </div>
+                  <div class="card-row">
+                    <div class="label">Weekly time</div>
+                    <div class="value">
+                      3–4 hrs live + 3–5 hrs homework (6–9 hrs total)
+                    </div>
                   </div>
                   <div class="card-row">
                     <div class="label">Access</div>
@@ -995,7 +1002,7 @@
                   <div class="list-bullet"></div>
                   <div>
                     <div class="list-title">
-                      Ship an end-to-end RAG system to production.
+                      Ship an end-to-end RAG system to production on AWS.
                     </div>
                     <div class="list-muted">
                       From ingestion jobs to APIs, caching, monitoring and
@@ -1020,11 +1027,12 @@
                   <div class="list-bullet"></div>
                   <div>
                     <div class="list-title">
-                      Talk about RAG like a senior engineer.
+                      Go from “60–70% demo accuracy” to “90%+ production RAG”.
                     </div>
                     <div class="list-muted">
-                      Develop the mental models and vocabulary to make and
-                      defend architectural decisions on your team.
+                      Use a systematic diagnosis & optimization framework
+                      instead of random techniques, so you know exactly which
+                      levers to pull next.
                     </div>
                   </div>
                 </li>
@@ -1142,13 +1150,14 @@
               <div>
                 <div class="section-kicker">Curriculum</div>
                 <h2 class="section-title">
-                  The 4-week Advanced RAG Mastery roadmap
+                  The 4-Week Advanced RAG Mastery curriculum
                 </h2>
               </div>
               <p class="section-description">
-                Each week we focus on one part of a production-grade RAG stack.
-                You’ll implement everything in code, with a single capstone
-                project tying it all together.
+                Depth over breadth. Systematic over scattered. Deployed over
+                theoretical. Across 9 live sessions we follow one arc: diagnose
+                your current RAG, systematically optimize it, then deploy and
+                monitor it in production.
               </p>
             </div>
 
@@ -1157,29 +1166,44 @@
                 <div class="curriculum-week">
                   <div class="curriculum-week-header">
                     <div class="curriculum-week-title">
-                      Week 1 — Foundations & data pipelines
+                      Week 1 — Diagnose & establish your baseline
                     </div>
-                    <div class="curriculum-week-tag">Architecture & data</div>
+                    <div class="curriculum-week-tag">Sessions 1–2</div>
                   </div>
                   <div class="curriculum-topics">
-                    RAG mental models · when RAG is (and isn’t) the right fit ·
-                    data sources, ingestion patterns · robust chunking strategies
-                    · embeddings & vector stores · building your first
-                    domain-specific index.
+                    Session 1 — The Production RAG Framework: why demo RAG
+                    gets stuck at 60–70%, the 5 failure modes (bad chunks,
+                    retrieval, re-ranking, queries, generation), and a
+                    step-by-step diagnosis framework. You’ll set up an
+                    evaluation harness (20–30 test queries), measure your
+                    baseline, and identify your #1 failure mode.
+                    <br /><br />
+                    Session 2 — Retrieval Optimization Part 1 (Hybrid Search):
+                    BM25 from first principles, when keyword beats embeddings,
+                    fusion strategies (RRF + weighted fusion), and live
+                    implementation of hybrid search on your system with an
+                    immediate 10–15% accuracy lift.
                   </div>
                 </div>
                 <div class="curriculum-week">
                   <div class="curriculum-week-header">
                     <div class="curriculum-week-title">
-                      Week 2 — Retrieval, reranking & prompt strategies
+                      Week 2 — Re-ranking & query optimization
                     </div>
-                    <div class="curriculum-week-tag">Quality & relevance</div>
+                    <div class="curriculum-week-tag">Sessions 3–4</div>
                   </div>
                   <div class="curriculum-topics">
-                    Dense vs sparse retrieval · hybrid search · rerankers ·
-                    retrieval-time filters · query rewriting · system/prompt
-                    patterns specific to RAG · handling long-context and
-                    hallucinations.
+                    Session 3 — Re-ranking Deep Dive: bi-encoder vs
+                    cross-encoder from first principles, when re-ranking
+                    actually helps, latency/cost/accuracy tradeoffs, and live
+                    implementation of cross-encoder and LLM-based re-ranking on
+                    top of your hybrid search.
+                    <br /><br />
+                    Session 4 — Query Optimization Patterns: HyDE
+                    (hypothetical document embeddings), multi-query generation,
+                    and query decomposition. You’ll build a decision tree for
+                    handling failing queries and systematically rescue your
+                    edge cases.
                   </div>
                 </div>
               </div>
@@ -1187,31 +1211,229 @@
                 <div class="curriculum-week">
                   <div class="curriculum-week-header">
                     <div class="curriculum-week-title">
-                      Week 3 — Productionization & performance
+                      Week 3 — Chunking & multi-hop reasoning
                     </div>
-                    <div class="curriculum-week-tag">APIs & infra</div>
+                    <div class="curriculum-week-tag">Sessions 5–6</div>
                   </div>
                   <div class="curriculum-topics">
-                    Turning notebooks into services · API design for RAG ·
-                    latency and cost optimization · caching strategies ·
-                    background jobs & reindexing · configuration management for
-                    experiments.
+                    Session 5 — Chunking Strategies from First Principles: the
+                    chunking paradox (small vs large chunks), fixed-size vs
+                    semantic chunking, sliding windows, domain-specific chunking
+                    (code/docs/legal), and metadata + hierarchical retrieval.
+                    You’ll experiment with 3 chunking strategies and optimize
+                    for your corpus.
+                    <br /><br />
+                    Session 6 — Multi-hop & Complex Query Patterns: when
+                    single-retrieval fails, iterative retrieval, query
+                    decomposition into sub-queries, and a light intro to
+                    agentic RAG with simple ReAct-style patterns and guardrails.
                   </div>
                 </div>
                 <div class="curriculum-week">
                   <div class="curriculum-week-header">
                     <div class="curriculum-week-title">
-                      Week 4 — Evaluation, observability & iteration
+                      Week 4 — Deployment, monitoring & evaluation
                     </div>
-                    <div class="curriculum-week-tag">Reliability</div>
+                    <div class="curriculum-week-tag">Sessions 7–8</div>
                   </div>
                   <div class="curriculum-topics">
-                    Building evaluation sets · retrieval metrics vs
-                    end-to-end metrics · offline vs online evaluation ·
-                    analytics & tracing · debugging bad answers · planning your
-                    next 90 days of RAG improvements post-cohort.
+                    Session 7 — AWS Deployment Architecture: Lambda + API
+                    Gateway patterns for RAG, vector DB options (Pinecone,
+                    pgvector, Weaviate), and a live end-to-end deployment of a
+                    RAG API to AWS (including secrets, env vars, and testing).
+                    <br /><br />
+                    Session 8 — Monitoring, Debugging & Cost Optimization:
+                    logging and metrics, CloudWatch setup, alerting, cost
+                    breakdown (embeddings, LLM calls, re-ranking, hosting),
+                    caching strategies, and evaluation frameworks (including
+                    LLM-as-judge and A/B testing).
                   </div>
                 </div>
+              </div>
+            </div>
+
+            <div class="curriculum-week">
+              <div class="curriculum-week-header">
+                <div class="curriculum-week-title">
+                  Week 5 — Buffer week & student showcases
+                </div>
+                <div class="curriculum-week-tag">Session 9</div>
+              </div>
+              <div class="curriculum-topics">
+                Final presentations of each student’s system (problem,
+                baseline, optimizations, results, and live demo), distilled
+                patterns that worked across domains, advanced topics to explore
+                next (multimodal RAG, deeper agentic patterns), and joining the
+                alumni community with ongoing office hours and support.
+              </div>
+            </div>
+
+            <div class="card">
+              <h2 class="section-title">The promise for each week</h2>
+              <ul class="list">
+                <li>
+                  <div class="list-bullet"></div>
+                  <div>
+                    <div class="list-title">
+                      Week 1 — Diagnosis & baseline.
+                    </div>
+                    <div class="list-muted">
+                      You’ll know exactly why your RAG fails (diagnosis
+                      framework + eval harness + clear baseline).
+                    </div>
+                  </div>
+                </li>
+                <li>
+                  <div class="list-bullet"></div>
+                  <div>
+                    <div class="list-title">
+                      Week 2 — Core accuracy lift.
+                    </div>
+                    <div class="list-muted">
+                      Your accuracy will improve 15–25% through hybrid search
+                      and re-ranking, plus query optimization for edge cases.
+                    </div>
+                  </div>
+                </li>
+                <li>
+                  <div class="list-bullet"></div>
+                  <div>
+                    <div class="list-title">
+                      Week 3 — Edge cases & complex queries.
+                    </div>
+                    <div class="list-muted">
+                      You’ll handle complex, multi-hop queries systematically
+                      with better chunking, metadata and multi-step retrieval.
+                    </div>
+                  </div>
+                </li>
+                <li>
+                  <div class="list-bullet"></div>
+                  <div>
+                    <div class="list-title">
+                      Week 4 — Deployed & monitored.
+                    </div>
+                    <div class="list-muted">
+                      Your system will be deployed, monitored, and costed on
+                      AWS — ready for real users.
+                    </div>
+                  </div>
+                </li>
+              </ul>
+              <p class="tagline">
+                <strong>Final outcome:</strong> 9 live sessions over 4 weeks +
+                1 buffer week, taking your RAG from a 60–70% “demo” to a
+                90%+ production system with AWS deployment and monitoring.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <!-- STRUCTURE & ACCOUNTABILITY -->
+        <section class="section">
+          <div class="section-inner grid-2">
+            <div>
+              <div class="section-header">
+                <div>
+                  <div class="section-kicker">Workload</div>
+                  <h2 class="section-title">Built for working professionals</h2>
+                </div>
+              </div>
+              <div class="card">
+                <ul class="list">
+                  <li>
+                    <div class="list-bullet"></div>
+                    <div>
+                      <div class="list-title">
+                        2 live sessions per week (Fri &amp; Sat).
+                      </div>
+                      <div class="list-muted">
+                        Each live session is 1.5 hours. You can attend live or
+                        catch up via recordings.
+                      </div>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="list-bullet"></div>
+                    <div>
+                      <div class="list-title">
+                        6–9 hours/week total commitment.
+                      </div>
+                      <div class="list-muted">
+                        Expect 3–4 hours of live time plus 3–5 hours of
+                        implementation and homework.
+                      </div>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="list-bullet"></div>
+                    <div>
+                      <div class="list-title">
+                        Weekly rhythm that compounds.
+                      </div>
+                      <div class="list-muted">
+                        Friday: learn new technique → Fri–Tue: implement →
+                        Tue: share results → Wed: office hours → Thu–Sat:
+                        refine → Saturday: present & learn next tool.
+                      </div>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            <div>
+              <div class="section-header">
+                <div>
+                  <div class="section-kicker">Accountability</div>
+                  <h2 class="section-title">
+                    The homework accountability system
+                  </h2>
+                </div>
+              </div>
+              <div class="card">
+                <ul class="list">
+                  <li>
+                    <div class="list-bullet"></div>
+                    <div>
+                      <div class="list-title">
+                        Weekly homework & metrics check-ins.
+                      </div>
+                      <div class="list-muted">
+                        After each Friday session you implement on your own
+                        system and submit results (screenshots, metrics) in the
+                        cohort space by Tuesday.
+                      </div>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="list-bullet"></div>
+                    <div>
+                      <div class="list-title">
+                        Mid-week office hours (Wed).
+                      </div>
+                      <div class="list-muted">
+                        1-hour group debugging & Q&amp;A call to unblock you,
+                        review homework, and refine your approach before the
+                        Saturday session.
+                      </div>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="list-bullet"></div>
+                    <div>
+                      <div class="list-title">
+                        Proactive dropout prevention.
+                      </div>
+                      <div class="list-muted">
+                        Miss 1 homework → personal DM check-in. Miss 2 →
+                        optional 1:1 call. Miss 3+ → you’re probably not ready
+                        right now; we’ll help you roll into a future cohort
+                        instead of feeling behind.
+                      </div>
+                    </div>
+                  </li>
+                </ul>
               </div>
             </div>
           </div>
